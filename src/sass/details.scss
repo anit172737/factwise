@@ -1,0 +1,98 @@
+@import "./base";
+
+.detail {
+  display: grid;
+  gap: 20px;
+  &_top {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    gap: 20px;
+    &-div {
+      display: grid;
+      justify-items: start;
+      &-label {
+        font-size: 16.5px;
+        color: rgb(179, 178, 178);
+      }
+
+      &-p {
+        font-size: 16.5px;
+        text-align: start;
+        width: 150px;
+      }
+
+      &-description {
+        font-size: 16.5px;
+        text-align: start;
+      }
+
+      &-input {
+        border-radius: 5px;
+        border: 1px solid rgb(179, 178, 178);
+        padding: 0px 4px;
+        width: 150px;
+        font-family: myFont;
+        font-size: 16.5px;
+        // height: 30px;
+      }
+
+      &-textArea {
+        width: 100%;
+        height: 14.5rem;
+        font-family: myFont;
+        font-size: 16.5px;
+        border-radius: 10px;
+        padding: 0px 5px;
+        border: 1px solid rgb(179, 178, 178);
+      }
+    }
+  }
+
+  &_description {
+    display: grid;
+    justify-items: start;
+    font-size: 16.5px;
+  }
+
+  &_icons {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+
+    &-edit {
+      color: rgb(0, 81, 255);
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &-submit {
+      color: rgb(9, 201, 121);
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &-btn {
+      border: none;
+      background-color: white;
+    }
+
+    &-delete {
+      color: rgb(255, 89, 0);
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}

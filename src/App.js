@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Home from "./components/home";
+import users from "./users.json";
 
 function App() {
+  const [userData, setUsersData] = useState(users);
+  const [search, setSearch] = useState("");
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        className="
+      App_search"
+        type="text"
+        placeholder="Search user"
+        value={search}
+        onChange={handleChange}
+      />
+      {userData.map((user) => (
+        <Home
+          user={user}
+          usersData={userData}
+          setUsersData={setUsersData}
+          search={search}
+        />
+      ))}
     </div>
   );
 }
