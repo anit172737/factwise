@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import "../src/sass/App.scss";
 import Home from "./components/home";
 import users from "./users.json";
 

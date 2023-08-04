@@ -155,15 +155,14 @@ const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
         />
       </div>
       <div className="detail_icons">
-        <button type="submit" className="detail_icons-btn">
-          <CheckCircle className="detail_icons-submit" size={26} />
-        </button>
-
         <XCircle
           className="detail_icons-delete"
           size={26}
           onClick={() => setOpenEdit(false)}
         />
+        <button type="submit" className="detail_icons-btn">
+          <CheckCircle className="detail_icons-submit" size={26} />
+        </button>
       </div>
     </form>
   );

@@ -86,15 +86,15 @@ const Details = ({ user, usersData, setUsersData, search }) => {
             <p className="detail_top-div-description">{user.description}</p>
           </div>
           <div className="detail_icons">
-            <Edit
-              className="detail_icons-edit"
-              size={26}
-              onClick={handleOpenEdit}
-            />
             <Trash2
               className="detail_icons-delete"
               size={26}
               onClick={handleOpenDelete}
+            />
+            <Edit
+              className="detail_icons-edit"
+              size={26}
+              onClick={handleOpenEdit}
             />
           </div>
         </div>
