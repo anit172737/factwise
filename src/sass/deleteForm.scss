@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  background: #6b63ff3b;
+  background: #ff63633b;
   width: 100%;
   height: 100%;
   padding: 3vw;
@@ -63,7 +63,7 @@
       &-btn {
         height: 40px;
         width: 100px;
-        background-color: $color-secondary;
+        background-color: rgb(255, 89, 0);
         color: white;
         border-radius: 10px !important;
         border: none;
@@ -73,8 +73,8 @@
 
         &-close {
           background-color: white;
-          border: 2px solid $color-secondary;
-          color: $color-secondary;
+          border: 2px solid rgb(255, 89, 0);
+          color: rgb(255, 89, 0);
         }
       }
     }
