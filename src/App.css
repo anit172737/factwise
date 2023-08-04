@@ -1,17 +1,1 @@
-.App {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  /* gap: 1rem; */
-  padding: 4rem;
-}
 
-.App_search {
-  height: 50px;
-  border: 1px solid rgb(185, 184, 184);
-  border-radius: 7px;
-  padding: 5px 10px;
-  font-size: 20px;
-  color: rgb(121, 120, 120);
-  font-family: myFont;
-}
