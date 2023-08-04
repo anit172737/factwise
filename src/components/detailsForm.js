@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { CheckCircle, XCircle } from "react-feather";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { editUser } from "../redux/userSlice";
 import Select from "react-select";
 
 const defaultValues = {
@@ -10,19 +13,17 @@ const defaultValues = {
   description: "",
 };
 
-const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
+const DetailsForm = ({ setOpenEdit, user, age }) => {
+  const { userList } = useSelector((state) => state.userMaster);
   const [newAge, setNewAge] = useState(age);
   const [newD, setNewD] = useState(user.description);
   const [newCountry, setNewCountry] = useState(user.country);
   const [newGender, setNewGender] = useState(user.gender);
+  const dispatch = useDispatch();
 
   const {
-    reset,
     control,
-    setError,
     setValue,
-    register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues });
@@ -36,10 +37,6 @@ const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
     setNewAge(e.target.value);
   };
 
-  const handleGenderChange = (e) => {
-    setNewGender(e.target.value);
-  };
-
   const handleCountryChange = (e) => {
     setNewCountry(e.target.value);
   };
@@ -48,11 +45,11 @@ const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
     setNewD(e.target.value);
   };
   const onSubmit = (data) => {
-    const modifiedArray = usersData.map((obj) => {
+    const modifiedArray = userList.map((obj) => {
       if (obj.id === data.id) {
         return {
           ...obj,
-          gender: data.gender,
+          gender: data.gender.value,
           dob: data.dob.toString(),
           country: data.country,
           description: data.description,
@@ -61,21 +58,22 @@ const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
       return obj;
     });
 
-    setUsersData(modifiedArray);
-    // if(user.id === )
+    dispatch(editUser(modifiedArray));
+    toast.success("User Edited Successfully");
     setOpenEdit(false);
   };
 
   useEffect(() => {
     setValue("id", user.id);
     setValue("dob", age);
-    setValue("gender", user.gender);
+    setValue("gender", {
+      label: user.gender,
+      value: user.gender,
+    });
     setValue("country", user.country);
     setValue("description", user.description);
   }, [user]);
 
-  const wat = watch("country");
-  console.log("wat", wat);
   return (
     <form className="detail" onSubmit={handleSubmit(onSubmit)}>
       <div className="detail_top">
@@ -102,22 +100,23 @@ const DetailsForm = ({ setOpenEdit, user, age, usersData, setUsersData }) => {
             name="gender"
             control={control}
             render={({ field }) => (
-              //   <Select
-              //     className="detail_top-div-input"
-              //     value={newGender}
-              //     onChange={handleGenderChange}
-              //     options={genderOptions}
-              //     {...field}
-              //   />
-
-              <select
-                className="detail_top-div-input"
-                onChange={(e) => setValue("gender", e.target.value)}
+              <Select
+                // className="detail_top-div-input"
+                // value={newGender}
+                // onChange={handleGenderChange}
+                options={genderOptions}
                 {...field}
-              >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+              />
+
+              //   <select
+              //     className="detail_top-div-input"
+              //     onChange={handleGenderChange}
+              //     value={newGender.value}
+              //     {...field}
+              //   >
+              //     <option value="Male">Male</option>
+              //     <option value="Female">Female</option>
+              //   </select>
             )}
           />
         </div>

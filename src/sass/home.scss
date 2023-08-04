@@ -1,16 +1,25 @@
 @import "./base";
 .home {
   display: grid;
-  //   justify-content: center;
+  justify-content: center;
   align-content: center;
-  //   gap: 1rem;
   width: 40vw;
   padding: 1rem 0rem;
+
+  @media only screen and (max-width: 1000px) {
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+    justify-content: start;
+  }
 
   &_container {
     width: 100%;
     &-accordion {
-      width: 100%;
+      width: 40vw;
+
       &-summary {
         width: 100%;
         display: flex;

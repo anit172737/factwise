@@ -4,10 +4,15 @@ import { Edit, Trash2 } from "react-feather";
 import DetailsForm from "./detailsForm";
 import DeleteForm from "./deleteForm";
 import mainData from "../users.json";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUSer, searchUser } from "../redux/userSlice";
+import toast from "react-hot-toast";
 
-const Details = ({ user, usersData, setUsersData, search }) => {
+const Details = ({ user }) => {
+  const { userList } = useSelector((state) => state.userMaster);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const dispatch = useDispatch();
   const calculateAge = (dateOfBirth) => {
     const currentDate = new Date();
     const dob = new Date(dateOfBirth);
@@ -25,20 +30,6 @@ const Details = ({ user, usersData, setUsersData, search }) => {
   let dob = user.dob;
   const age = dob?.includes("-") ? calculateAge(user.dob) : dob;
 
-  useEffect(() => {
-    if (search !== "") {
-      const filteredUsers = mainData?.filter(
-        (user) =>
-          user?.first?.toLowerCase().includes(search?.toLowerCase()) ||
-          user?.last?.toLowerCase().includes(search?.toLowerCase())
-      );
-
-      setUsersData(filteredUsers);
-    } else {
-      setUsersData(mainData);
-    }
-  }, [search]);
-
   const handleOpenEdit = () => {
     setOpenEdit(true);
   };
@@ -48,8 +39,10 @@ const Details = ({ user, usersData, setUsersData, search }) => {
   };
 
   const handleDelete = async () => {
-    const arr = await usersData.filter((e) => e.id !== user.id);
-    setUsersData(arr);
+    const arr = await userList.filter((e) => e.id !== user.id);
+    dispatch(deleteUSer(arr));
+
+    toast.success("Contact Deleted Successfully");
     setOpenDelete(false);
   };
   return (
@@ -58,13 +51,7 @@ const Details = ({ user, usersData, setUsersData, search }) => {
         <DeleteForm setOpenDelete={setOpenDelete} handleDelete={handleDelete} />
       )}
       {openEdit ? (
-        <DetailsForm
-          setOpenEdit={setOpenEdit}
-          user={user}
-          age={age}
-          usersData={usersData}
-          setUsersData={setUsersData}
-        />
+        <DetailsForm setOpenEdit={setOpenEdit} user={user} age={age} />
       ) : (
         <div className="detail">
           <div className="detail_top">

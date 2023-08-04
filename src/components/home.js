@@ -1,10 +1,10 @@
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { ChevronDown } from "react-feather";
 import "../sass/home.scss";
 import Details from "./details";
 
-const Home = ({ user, usersData, setUsersData, search }) => {
+const Home = ({ user }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div className="home">
@@ -27,12 +27,7 @@ const Home = ({ user, usersData, setUsersData, search }) => {
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Details
-              user={user}
-              usersData={usersData}
-              setUsersData={setUsersData}
-              search={search}
-            />
+            <Details user={user} />
           </AccordionDetails>
         </Accordion>
       </div>
