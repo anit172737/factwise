@@ -27,8 +27,6 @@ function App() {
     }
   }, [search]);
 
-  console.log("search", search);
-  console.log("userList", userList);
   return (
     <div className="App">
       <input
