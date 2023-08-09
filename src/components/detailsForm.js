@@ -3,7 +3,7 @@ import { CheckCircle, XCircle } from "react-feather";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "../redux/userSlice";
+import { editUser, searchUser } from "../redux/userSlice";
 import Select from "react-select";
 
 const defaultValues = {
@@ -14,7 +14,7 @@ const defaultValues = {
 };
 
 const DetailsForm = ({ setOpenEdit, user, age }) => {
-  const { userList } = useSelector((state) => state.userMaster);
+  const { userList, searchList } = useSelector((state) => state.userMaster);
   const [newAge, setNewAge] = useState(age);
   const [newD, setNewD] = useState(user.description);
   const [newCountry, setNewCountry] = useState(user.country);
@@ -59,6 +59,23 @@ const DetailsForm = ({ setOpenEdit, user, age }) => {
     });
 
     dispatch(editUser(modifiedArray));
+
+    if (searchList.length !== 0) {
+      const modifiedArray = searchList.map((obj) => {
+        if (obj.id === data.id) {
+          return {
+            ...obj,
+            gender: data.gender.value,
+            dob: data.dob.toString(),
+            country: data.country,
+            description: data.description,
+          };
+        }
+        return obj;
+      });
+
+      dispatch(searchUser(modifiedArray));
+    }
     toast.success("User Edited Successfully");
     setOpenEdit(false);
   };

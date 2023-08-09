@@ -14,6 +14,7 @@ export const userMaster = createSlice({
     },
     editUser: (state, action) => {
       state.userList = action.payload;
+      state.newList = action.payload;
     },
     deleteUSer: (state, action) => {
       state.userList = action.payload;

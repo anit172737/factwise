@@ -28,7 +28,6 @@ function App() {
       dispatch(searchUser(""));
     }
   }, [search]);
-
   return (
     <div className="App">
       <input
