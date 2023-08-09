@@ -9,7 +9,7 @@ import { deleteUSer, searchUser } from "../redux/userSlice";
 import toast from "react-hot-toast";
 
 const Details = ({ user }) => {
-  const { userList } = useSelector((state) => state.userMaster);
+  const { userList, searchList } = useSelector((state) => state.userMaster);
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const dispatch = useDispatch();
@@ -41,6 +41,11 @@ const Details = ({ user }) => {
   const handleDelete = async () => {
     const arr = await userList.filter((e) => e.id !== user.id);
     dispatch(deleteUSer(arr));
+
+    if (searchList.length !== 0) {
+      const searchArr = await searchList?.filter((e) => e.id !== user.id);
+      dispatch(searchUser(searchArr));
+    }
 
     toast.success("Contact Deleted Successfully");
     setOpenDelete(false);

@@ -6,10 +6,11 @@ export const userMaster = createSlice({
   initialState: {
     userList: users,
     newList: users,
+    searchList: [],
   },
   reducers: {
     searchUser: (state, action) => {
-      state.userList = action.payload;
+      state.searchList = action.payload;
     },
     editUser: (state, action) => {
       state.userList = action.payload;
